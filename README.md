@@ -59,6 +59,11 @@ pip install -r requirements.txt
 ## Development Etiquette
 
 This section is subject to change throughout the course of development.
+At times, Google can be your friend with Git, but reach out to us with
+any help you may need!
+
+When in doubt, [check out "Oh Shit! Git!"](https://ohshitgit.com) 
+
 
 Make sure your identity through Git is setup well.
 
@@ -78,8 +83,16 @@ git config --global user.email "jaminock@umich.edu"
 
 When developing, we suggest making a branch for new files or the
 modifications of existing files. This will allow your local Git repo to stay
-clean and organized.
+clean and organized. It might also be helpful if you **commit and push to a
+branch named after your uniqname** 
 
 ```
+# List branches
 git branch
+
+# Create a new branch
+git checkout -b <branch>
+
+# Switch to a branch
+git checkout <branch>
 ```
