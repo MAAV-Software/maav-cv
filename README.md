@@ -8,7 +8,7 @@ vision algorithms that we intend to use on our vehicle for Mission 9 of IARC.
 While our code base is written in C++ primarily, we are composing our algorithms
 in Python because the OpenCV library is available for both languages, and Python
 allows an easy way to test code and import the OpenCV library while avoiding the
-hassles that come with including OpenCV using CMake, Ros with catkin_ws, etc.
+hassles that come with including OpenCV using CMake, ROS with catkin_ws, etc.
 
 Additionally, this gives members of our team experience working with Python.
 
@@ -24,7 +24,7 @@ First, clone this repository. You can either use HTTPS or SSH with a key setup
 through your account.
 ```
 git clone <link>
-cd maav-cv # TODO Is this right?
+cd maav-cv
 ```
 
 Next, we recommend setting up a Python virtual environment to manage your
@@ -36,7 +36,8 @@ sudo apt-get install python3 python3-venv python3-pip
 
 # Verify you are in the correct folder
 git status
-  On branch master... # TODO Make better
+  On branch master
+  ...
 
 # Setup the Virtual Environment
 python3 -m venv env
