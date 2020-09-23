@@ -1,0 +1,7 @@
+# MAAV Computer Vision Repository
+
+# Ignore Python Virtual Environment install files and binaries
+env
+
+# Ignore development environment files for IDEs or other editors
+.vscode

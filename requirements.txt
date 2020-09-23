@@ -1,0 +1,4 @@
+# MAAV Computer Vision Repository
+# Required libraries for Python OpenCV algorithms
+
+opencv-python==4.4.0.42
