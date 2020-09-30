@@ -32,6 +32,7 @@ project dependencies so that you don't have 238 libraries installed in your
 generic directories.
 ```
 # Make sure python3 and python3-venv are installed
+sudo apt-get update
 sudo apt-get install python3 python3-venv python3-pip
 
 # Verify you are in the correct folder
