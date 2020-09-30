@@ -60,12 +60,17 @@ pip install -r requirements.txt
 
 ## Development Etiquette
 
+**UPDATE 9/30/20: We will use forks for developing, and committing to this
+official repo will happen through the website, where a pull request can be
+created. The README will be updated with info on how to fork later.**
+
 This section is subject to change throughout the course of development.
 At times, Google can be your friend with Git, but reach out to us with
 any help you may need!
 
 When in doubt, [check out "Oh Shit! Git!"](https://ohshitgit.com) 
 
+### Git Identity
 
 Make sure your identity through Git is setup well.
 
@@ -83,10 +88,13 @@ git config --global user.name "Jacob Minock"
 git config --global user.email "jaminock@umich.edu"
 ```
 
-When developing, we suggest making a branch for new files or the
-modifications of existing files. This will allow your local Git repo to stay
-clean and organized. It might also be helpful if you **commit and push to a
-branch named after your uniqname** 
+### Git Branches
+
+When developing a specific, new feature or set of changes, we suggest making
+a branch for new files or the modifications of existing files. This will
+allow your `master` branch to stay clean and organized in terms of commit
+history and other qualities. Generally changes to the `master` branch only
+happen with very small fixes - like updating a `README.md` or one doc.
 
 ```
 # List branches
@@ -98,3 +106,17 @@ git checkout -b <branch>
 # Switch to a branch
 git checkout <branch>
 ```
+
+### Git Repository Fork
+
+TODO
+
+## Appendix A: Helpful Resources and Links
+
+OpenCV in Python Tutorials Page:
+
+https://docs.opencv.org/master/dc/d4d/tutorial_py_table_of_contents_gui.html
+
+Intel RealSense Python Wrapper Docs:
+
+https://github.com/IntelRealSense/librealsense/tree/master/wrappers/python
