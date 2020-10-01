@@ -1,5 +1,5 @@
 # MAAV Computer Vision Repository
 # Required libraries for Python OpenCV algorithms
 
-opencv-python>=4.4
+opencv-python==4.1.2.30
 pyrealsense2>=2.38
