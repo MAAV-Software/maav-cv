@@ -14,11 +14,9 @@ Additionally, this gives members of our team experience working with Python.
 
 ## Getting Started
 
-This walkthrough was intended for either native Ubuntu / Linux, or Windows WSL2.
-If you are running Mac, one significant change would be going from
-`sudo apt-get install ...` to `brew install`. Please reach out if you encounter
-other difficulties working on a Mac, or feel free to commit advice into this
-README for Mac users based on your experience.
+This tutorial was intended for Ubuntu / Linux, and modified for support in Mac
+and Windows WSL environments. While most issues have been worked out, you may
+have some difficulties still - reach out if you have trouble.
 
 First, clone this repository. You can either use HTTPS or SSH with a key setup
 through your account.
@@ -27,23 +25,22 @@ git clone <link>
 cd maav-cv
 ```
 
-Next, we recommend setting up a Python virtual environment to manage your
-project dependencies so that you don't have 238 libraries installed in your
-generic directories.
+Next, install required software to create a Python virtual environment for
+installing dependencies and working on CV projects.
 ```
-# Make sure python3 and python3-venv are installed
+# WSL / Linux:
 sudo apt-get update
-sudo apt-get install python3 python3-venv python3-pip
+sudo apt-get install python3.7 python3-pip
+pip install virtualenv
 
-# Verify you are in the correct folder
-git status
-  On branch master
-  ...
+# Mac with Homebrew: NEEDS CONFIRMATION
+brew install python@3.7
+pip install virtualenv
+```
 
-# Setup the Virtual Environment
-python3 -m venv env
-
-# Source / Activate the Virtual Environment
+Setup your virtual environment using Python 3.7.x.
+```
+virtualenv --python=/usr/bin/python3.7 env
 source env/bin/activate
 ```
 
@@ -58,6 +55,54 @@ run the following command:
 pip install -r requirements.txt
 ```
 
+## Windows and WSL Aside: X-Server
+
+Normally OpenCV GUI code can run just fine in this environment. However, if
+you attempt to run this code in Windows with WSL, you will encounter an
+error similar to one of these:
+```
+python3 hello.py
+  ...
+  qt.qpa.xcb: could not connect to display
+  ...
+
+# OR
+
+python3 hello.py
+  ...
+  : cannot connect to X server
+```
+
+This is because Windows and WSL do not natively support Linux GUI applications.
+We will install an external program to host an X-Server, which will process
+data and display a GUI that interacts with your program.
+
+The X-Server application we will use is vcXsrv, which you can
+[download here](https://sourceforge.net/projects/vcxsrv/). After installing,
+start the application, and start it with default settings **EXCEPT FOR ONE:
+Disable Access Control**
+
+![vcXsrv App Image](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/201596iBCB2B8DA889830E0)
+
+Then, you need to set an environment variable in your WSL terminal so that
+the X-Server will be used for displaying GUI apps.
+```
+export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+```
+**Tip:** Add this line to the end of your `~/.bashrc` so that it will run
+everytime you start a new bash terminal. It's an extra step you won't have
+to remember.
+
+## Running Sample Code
+
+At this point, you should be able to run the sample code without difficulties:
+```
+python3 hello.py
+```
+I encourage you to look at the code and modify it. For example, change the
+image used, modify the image using OpenCV functions, or do anything else
+creative you can think of!
+
 ## Development Etiquette
 
 **UPDATE 9/30/20: We will use forks for developing, and committing to this
@@ -68,7 +113,7 @@ This section is subject to change throughout the course of development.
 At times, Google can be your friend with Git, but reach out to us with
 any help you may need!
 
-When in doubt, [check out "Oh Shit! Git!"](https://ohshitgit.com) 
+When in doubt, [check out "Oh Shit! Git!"](https://ohshitgit.com)
 
 ### Git Identity
 
