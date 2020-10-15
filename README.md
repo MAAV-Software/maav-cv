@@ -177,7 +177,11 @@ $ git checkout <branch>
 
 ## Git Repository Fork
 
-TODO
+Simple GitHub Forking Tutorial:
+
+https://guides.github.com/activities/forking/
+
+Cloning repositories is a straightforward approach to making changes to shared repositories. 'Forked' repositories are personal copies of a shared project, in which you can make changes, and then offer those changes up to the original project. 
 
 # Appendix A: Helpful Resources and Links
 
