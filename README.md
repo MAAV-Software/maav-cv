@@ -19,14 +19,14 @@ have some difficulties still - reach out if you have trouble.
 
 First, clone this repository. You can either use HTTPS or SSH with a key setup
 through your account.
-```
+```bash
 $ git clone <link>
 $ cd maav-cv
 ```
 
 Next, install required software to create a Python virtual environment for
 installing dependencies and working on CV projects.
-```
+```bash
 # WSL / Linux:
 $ sudo apt-get update
 $ sudo apt-get install python3.7 python3-pip
@@ -38,7 +38,7 @@ $ pip install virtualenv
 ```
 
 Setup your virtual environment using Python 3.7.x.
-```
+```bash
 # WSL / Linux:
 $ virtualenv --python=/usr/bin/python3.7 env
 $ source env/bin/activate
@@ -55,7 +55,7 @@ use for the code.**
 We have included `requirements.txt` to install OpenCV and any other required
 Python libraries. To install these requirements,
 run the following command:
-```
+```bash
 $ pip install -r requirements.txt
 ```
 
@@ -64,7 +64,7 @@ $ pip install -r requirements.txt
 Normally OpenCV GUI code can run just fine in this environment. However, if
 you attempt to run this code in Windows with WSL, you will encounter an
 error similar to one of these:
-```
+```bash
 $ python3 hello.py
 
 ...
@@ -101,7 +101,7 @@ the following command:
 ```
 In this example, I am running WSL2. So, once you know which version you are
 running, use the appropriate `DISPLAY` environment variable below:
-```
+```bash
 # WSL1:
 $ export DISPLAY="localhost:0"
 
@@ -115,12 +115,12 @@ to remember.
 # Running Sample Code
 
 At this point, you should be able to run the sample code without difficulties:
-```
+```bash
 $ python3 hello.py
 ```
 Depending on some other factors involving `pyrealsense2`, you might also
 be able to run the Depth Camera sample code if you have an Intel D4XX camera:
-```
+```bash
 $ python3 hello-rs.py
 ```
 
@@ -140,7 +140,7 @@ When in doubt, [check out "Oh Shit! Git!"](https://ohshitgit.com)
 
 Make sure your identity through Git is setup well.
 
-```
+```bash
 # List current global config, which may contain identity info
 
 $ git config --global -l
@@ -164,7 +164,7 @@ allow your `master` branch to stay clean and organized in terms of commit
 history and other qualities. Generally changes to the `master` branch only
 happen with very small fixes - like updating a `README.md` or one doc.
 
-```
+```bash
 # List branches
 $ git branch
 
@@ -197,7 +197,7 @@ https://github.com/IntelRealSense/librealsense/tree/master/wrappers/python
 
 You might run into the following, especially on a Mac, when running
 `pip install -r requirements`:
-```
+```bash
 $ pip install -r requirements.txt
 ...
 ERROR: Could not find a version that satisfies the requirement pyrealsense2>=2.2
@@ -217,7 +217,7 @@ work-around.
 TODO Make cleaner.
 
 Follow GitHub issue below, but need to use
-```
+```bash
 cmake .. -DBUILD_EXAMPLES=false -DBUILD_PYTHON_BINDINGS=true
 ```
 or else compile errors will ensue. Connor needed to comment out sections in
