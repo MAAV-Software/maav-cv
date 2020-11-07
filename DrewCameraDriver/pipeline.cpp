@@ -16,11 +16,12 @@
 using namespace cv;
 using namespace std;
 
+void update_data(rs2::frame_queue& data, rs2::frame& depth, rs2::colorizer& color_map);
 
 int main(int argc, char** argv){
 
-    std::mutex queue_lock;
-    std::condition_variable queue_empty;
+    //std::mutex queue_lock;
+    //std::condition_variable queue_empty;
 
     rs2::pipeline pipe;
     rs2::config cfg;
@@ -50,7 +51,7 @@ int main(int argc, char** argv){
 
             rs2::frame filtered = color_frame;
 
-            //CAN APPLY SOME FILTERS HERE
+            //CAN PROBS APPLY SOME FILTERS HERE
 
             filtered_data.enqueue(filtered);
             original_data.enqueue(color_frame);     
@@ -81,6 +82,7 @@ int main(int argc, char** argv){
         
     }
 }
+
 
 void update_data(rs2::frame_queue& data, rs2::frame& depth, rs2::colorizer& color_map){
     rs2::frame f;
