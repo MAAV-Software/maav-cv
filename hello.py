@@ -6,6 +6,10 @@ script_path = os.path.realpath(__file__)
 print(script_path)
 print(__file__)
 
+# Print helpful information
+print("\nDisplaying sample image using OpenCV2. Press any key to exit. \
+    \nDO NOT CLOSE THE WINDOW!!! You might need to restart your terminal.\n")
+
 # Get the image from the disk
 mast = cv2.imread(cv2.samples.findFile('mast.png'))
 if mast is None:
@@ -17,8 +21,7 @@ if mast is None:
 # Show the image
 cv2.imshow('Mast for Mission 9', mast)
 
-# Wait until enter is pressed
+# Wait for a key press
 key_wait = cv2.waitKey(0)
-while key_wait != 13:  # 13 is the return / enter key
-    # BTW this is "busy waiting", which is usually bad code style!
-    key_wait = cv2.waitKey(0)
+# while key_wait != 13:  # 13 is the return / enter key
+#     key_wait = cv2.waitKey(0)
