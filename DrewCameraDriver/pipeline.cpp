@@ -28,8 +28,8 @@ int main(int argc, char** argv){
     pipe.start(cfg);
 
     const auto CAPACITY = 5; // allow max latency of 5 frames
-    rs2::frame_queue original_data;
-    rs2::frame_queue filtered_data;
+    rs2::frame_queue original_data(CAPACITY);
+    rs2::frame_queue filtered_data(CAPACITY);
 
     rs2::pointcloud original_pc;
     rs2::pointcloud filtered_pc;
