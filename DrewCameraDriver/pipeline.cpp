@@ -5,11 +5,6 @@
 #include <vector>
 #include <chrono>
 
-#include <imgui.h>
-#include "./imgui/imgui/backends/imgui_impl_glfw.h"
-
-
-
 #include <math.h>
 #include <queue>
 #include <unordered_set>
