@@ -14,28 +14,14 @@ using namespace std;
 using namespace rs2;
 using namespace cv;
 
-void cameraDriver();
-void benchmark();
-void process(cv::Mat color, cv::Mat depth);
-
-
 std::deque<cv::Mat> colorImages;
 std::deque<cv::Mat> depthImages;
 std::mutex mutexColor;
 std::mutex mutexDepth;
 std::condition_variable emptyColor;
 std::condition_variable emptyDepth;
+//want to define these as extern variables in benchmark file
 
-int main(int argc, char * argv[]) {
-  std::thread driver(cameraDriver);
-  std::thread benchmarker(benchmark);
-
-  driver.join();
-  benchmarker.join();
-
-  return 0;
-
-}
 
 void cameraDriver()
 {
@@ -81,40 +67,27 @@ void cameraDriver()
 
 }
 
-void benchmark() {
-  while(1) {
-    std::unique_lock<std::mutex> lock1(mutexColor,  std::defer_lock);
-    std::unique_lock<std::mutex> lock2(mutexDepth,  std::defer_lock);
-    lock1.lock();
-    while(colorImages.empty()) {
-      emptyColor.wait(lock1);
-    }
-    auto color = colorImages.front();
-    colorImages.pop_front();
 
-    lock1.unlock();
-    lock2.lock();
-    while(depthImages.empty()) {
-      emptyDepth.wait(lock2);
-    }
-    auto depth = depthImages.front();
-    depthImages.pop_front();
-    lock2.unlock();
-
-    process(color, depth);
-
+//returns pair containing color and depth images
+//color can be accessed with .first
+//depth can be accessed with .second
+std::pair<cv::Mat, cv::Mat> getImage() {
+  std::unique_lock<std::mutex> lock1(mutexColor,  std::defer_lock);
+  std::unique_lock<std::mutex> lock2(mutexDepth,  std::defer_lock);
+  lock1.lock();
+  while(colorImages.empty()) {
+    emptyColor.wait(lock1);
   }
-}
+  auto color = colorImages.front();
+  colorImages.pop_front();
 
-void process(cv::Mat color, cv::Mat depth){
-  //cout << color.channels() << endl;
-
-  cv::imshow("depth", depth);
-  cv::imshow("color", color);
-  //cout << depth.channels() << endl;
-
-  cv::waitKey(500);
-  cv::destroyAllWindows();
-  return;
-
+  lock1.unlock();
+  lock2.lock();
+  while(depthImages.empty()) {
+    emptyDepth.wait(lock2);
+  }
+  auto depth = depthImages.front();
+  depthImages.pop_front();
+  lock2.unlock();
+  return std::make_pair(color, depth);
 }
