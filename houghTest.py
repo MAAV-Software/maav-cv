@@ -3,7 +3,7 @@ import math
 import cv2 as cv
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv.VideoCapture(0)
 
 # Check if the webcam is opened correctly
 if not cap.isOpened():
@@ -47,4 +47,4 @@ while i < 33:
     i++
 
 cap.release()
-cv2.destroyAllWindows()
+cv.destroyAllWindows()

@@ -17,7 +17,7 @@ while i < 100:
     dst = cv.dilate(dst,None)
     frame[dst>0.01*dst.max()]=[0,0,255]
 
-    cv2.imwrite(dest, frame)
+    cv.imwrite(dest, frame)
 
     i++
 

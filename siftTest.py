@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-cap = cv2.VideoCapture(0)
+cap = cv.VideoCapture(0)
 
 # Check if the webcam is opened correctly
 if not cap.isOpened():
@@ -18,9 +18,9 @@ while i < 100:
 
     frame = cv.drawKeypoints(gray,kp,frame)
 
-    cv2.imwrite(dest, frame)
+    cv.imwrite(dest, frame)
 
     i++
 
 cap.release()
-cv2.destroyAllWindows()
+cv.destroyAllWindows()
