@@ -12,82 +12,46 @@
 #include <thread>
 #include <atomic>
 #include <mutex>
+#include "Driver.h"
 
 using namespace cv;
 using namespace std;
 
 void update_data(rs2::frame_queue& data, rs2::frame& depth, rs2::colorizer& color_map);
+void CameraDriver();
+void Benchmarking();
 
 int main(int argc, char** argv){
-
-    //std::mutex queue_lock;
-    //std::condition_variable queue_empty;
-
-    rs2::pipeline pipe;
-    rs2::config cfg;
-    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
-    pipe.start(cfg);
-
-    const auto CAPACITY = 5; // allow max latency of 5 frames
-    rs2::frame_queue original_data(CAPACITY);
-    rs2::frame_queue filtered_data(CAPACITY);
-
-    rs2::pointcloud original_pc;
-    rs2::pointcloud filtered_pc;
+    driver(); //Starts the camera driver
     
-    rs2::colorizer color_map;
+    //Main Thread
+    Benchmarking();
+}
 
-    std::atomic_bool stopped(false);
+void CameraDriver() {
+    while (!stopped){
+        rs2::frameset data = pipe.wait_for_frames();
+        rs2::frame color_frame = data.get_color_frame();
+        rs2::frame depth_frame = data.get_depth_frame();
+        
 
-    std::thread processing_boi([&]() { 
-        while (!stopped){
-            rs2::frameset data = pipe.wait_for_frames();
-            rs2::frame color_frame = data.get_color_frame();
-            
-            if (!color_frame){
-                cout << "Not a thing" << endl;
-                return;
-            }
+        color_data.enqueue(color_frame);
+        depth_data.enqueue(depth_frame);     
+    }
+}
 
-            rs2::frame filtered = color_frame;
-
-            //CAN PROBS APPLY SOME FILTERS HERE
-
-            filtered_data.enqueue(filtered);
-            original_data.enqueue(color_frame);     
-        }
-    });
-
-    processing_boi.detach();
-
-    while (true){
+void Benchmarking() {
+    while (!stopped){ //pulls from queue and does processing
         rs2::frame color_frame;
         rs2::frame color_filtered;
 
-        auto last_time = std::chrono::high_resolution_clock::now(); //Last frame arrived time
-        
-        if (original_data.poll_for_frame(&color_frame)){
+        if (color_data.poll_for_frame(&color_frame)){
             cout << "got frame" << endl;
             Mat color(Size(640, 480), CV_8UC3, (void*)color_frame.get_data(), Mat::AUTO_STEP);
             namedWindow("Display Image", WINDOW_AUTOSIZE);
             imshow("Display Image", color);
             waitKey(1);
         }
-        
-        auto this_time = std::chrono::high_resolution_clock::now();
-
-        //auto duration = std::chrono::duration_cast<std::chrono::microseconds>(this_time - last_time);
-        //cout << duration.count() << endl;
-
-        //Check for exit
-        /*
-        if((char)cv::waitKey(1) == 27){
-            cout << "esc pressed" << endl;
-            stopped = true;
-            return 0;
-        }
-        */
-        
     }
 }
 
@@ -98,3 +62,14 @@ void update_data(rs2::frame_queue& data, rs2::frame& depth, rs2::colorizer& colo
         depth = f;
     }
 }
+
+
+
+//Check for exit
+        /*
+        if((char)cv::waitKey(1) == 27){
+            cout << "esc pressed" << endl;
+            stopped = true;
+            return 0;
+        }
+        */
