@@ -55,13 +55,15 @@ std::pair<cv::Mat,cv::Mat> getImage() {
         if (color_data.poll_for_frame(&color_frame)){
             cout << "got frame" << endl;
             color = Mat(Size(640, 480), CV_8UC3, (void*)color_frame.get_data(), Mat::AUTO_STEP);
+            break;
         }
     }
 
     while (1){
         if (depth_data.poll_for_frame(&depth_frame)){
             cout << "got frame" << endl;
-            color = Mat(Size(640, 480), CV_8UC3, (void*)color_frame.get_data(), Mat::AUTO_STEP);
+            depth = Mat(Size(640, 480), CV_8UC3, (void*)depth_frame.get_data(), Mat::AUTO_STEP);
+            break;
         }
     }
 
