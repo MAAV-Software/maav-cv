@@ -1,3 +1,5 @@
+#adapted from opencv documentation examples
+
 import numpy as np
 import cv2 as cv
 
@@ -9,15 +11,19 @@ if not cap.isOpened():
 
 dest = '_________'
 i = 0
+orb = cv.ORB_create()
+
 while i < 100:
+
     ret, frame = cap.read()
     gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
-    dst = cv.cornerHarris(gray,2,3,0.04)
 
-    dst = cv.dilate(dst,None)
-    frame[dst>0.01*dst.max()]=[0,0,255]
+    kp = orb.detect(gray,None)
+    kp, des = orb.compute(gray, kp)
 
-    cv.imwrite(dest, frame)
+    frame = cv.drawKeypoints(gray, kp, None, color=(0,255,0), flags=0)
+
+    #cv.imwrite(dest, frame)
 
     i++
 

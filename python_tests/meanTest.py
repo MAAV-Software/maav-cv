@@ -1,3 +1,5 @@
+#adapted from opencv documentation examples
+
 import cv2
 
 cap = cv2.VideoCapture(0)
@@ -11,7 +13,7 @@ i = 0
 while i < 100:
     ret, frame = cap.read()
     trans = cv2.blur(frame)
-    cv2.imwrite(dest, trans)
+    #cv2.imwrite(dest, trans)
 
     i++
 

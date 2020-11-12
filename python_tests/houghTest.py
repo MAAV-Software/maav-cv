@@ -1,3 +1,5 @@
+#adapted from opencv documentation examples
+
 import sys
 import math
 import cv2 as cv
@@ -40,9 +42,9 @@ while i < 33:
             l = linesP[i][0]
             cv.line(cdstP, (l[0], l[1]), (l[2], l[3]), (0,0,255), 3, cv.LINE_AA)
 
-    cv.imwrite(dest, src)
-    cv.imwrite(dest, cdst)
-    cv.imwrite(dest, cdstP)
+    #cv.imwrite(dest, src)
+    #cv.imwrite(dest, cdst)
+    #cv.imwrite(dest, cdstP)
 
     i++
 

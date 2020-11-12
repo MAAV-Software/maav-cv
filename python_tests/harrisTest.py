@@ -1,3 +1,5 @@
+#adapted from opencv documentation examples
+
 import numpy as np
 import cv2 as cv
 
@@ -12,13 +14,12 @@ i = 0
 while i < 100:
     ret, frame = cap.read()
     gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
-    
-    sift = cv.SIFT_create()
-    kp = sift.detect(gray,None)
+    dst = cv.cornerHarris(gray,2,3,0.04)
 
-    frame = cv.drawKeypoints(gray,kp,frame)
+    dst = cv.dilate(dst,None)
+    frame[dst>0.01*dst.max()]=[0,0,255]
 
-    cv.imwrite(dest, frame)
+    #cv.imwrite(dest, frame)
 
     i++
 
