@@ -40,5 +40,5 @@ void driver();
  */
 std::pair<Mat,Mat> getImage();
 
-// Max latency is 15 frames in the queue
-const auto CAPACITY = 15;
+// Max latency is 5 frames in the queue
+const auto CAPACITY = 5;
