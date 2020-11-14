@@ -1,4 +1,5 @@
 #adapted from opencv documentation examples
+#commented code is general opencv functions, above their corresponding driver function
 
 import sys
 import math
@@ -55,5 +56,5 @@ while i < 33:
 
     i++
 
-cap.release()
+#cap.release()
 cv.destroyAllWindows()

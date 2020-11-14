@@ -1,4 +1,5 @@
 #adapted from opencv documentation examples
+#commented code is general opencv functions, above their corresponding driver function
 
 import cv2
 import camera-driver
@@ -23,5 +24,5 @@ while i < 100:
 
     i++
 
-cap.release()
+#cap.release()
 cv2.destroyAllWindows()

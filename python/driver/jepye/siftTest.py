@@ -1,4 +1,5 @@
 #adapted from opencv documentation examples
+#commented code is general opencv functions, above their corresponding driver function
 
 import numpy as np
 import cv2 as cv
@@ -30,5 +31,5 @@ while i < 100:
 
     i++
 
-cap.release()
+#cap.release()
 cv.destroyAllWindows()
