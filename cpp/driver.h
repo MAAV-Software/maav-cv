@@ -15,14 +15,12 @@
 #include <vector>
 
 // Third party
-// From drewskis
-#include <opencv2/opencv.hpp>
-#include <opencv2/highgui.hpp>
-#include <librealsense2/rs.hpp>
-// From chereddy
-#include <librealsense2/rs.hpp>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+// Note: if there is an include error, the third party libs aren't built.
+// Run ./build-third-party.sh from the cpp directory to build the libs.
+// #include "opencv2/opencv.hpp"  // TODO Do we need the whole header?
+#include "opencv2/highgui.hpp"
+#include "opencv2/imgproc.hpp"
+#include "librealsense2/rs.hpp"
 
 using std::cout;
 using std::end;
