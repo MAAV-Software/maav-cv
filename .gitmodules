@@ -1,0 +1,6 @@
+[submodule "cpp/opencv"]
+	path = cpp/opencv
+	url = https://github.com/opencv/opencv.git
+[submodule "cpp/librealsense"]
+	path = cpp/librealsense
+	url = https://github.com/IntelRealSense/librealsense.git
