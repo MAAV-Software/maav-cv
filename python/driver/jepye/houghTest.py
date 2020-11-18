@@ -19,6 +19,8 @@ pullFrames(color_queue, depth_queue)
 
 dest = '_________'
 
+start = cv.getTickCount()
+
 i = 0
 while i < 33:
     #ret, src = cap.read()
@@ -55,6 +57,9 @@ while i < 33:
     #cv.imwrite(dest, cdstP)
 
     i++
+
+end = cv.getTickCount()
+time = (end - start)/cv.getTickFrequency()
 
 #cap.release()
 cv.destroyAllWindows()

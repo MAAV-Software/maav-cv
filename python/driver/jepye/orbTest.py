@@ -16,11 +16,13 @@ pullFrames(color_queue, depth_queue)
 #    raise IOError("Cannot open webcam")
 
 dest = '_________'
+
+start = cv.getTickCount()
+
 i = 0
 orb = cv.ORB_create()
 
 while i < 100:
-
     #ret, frame = cap.read()
     frame, depth = getImage(color_queue, depth_queue)
     gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
@@ -33,6 +35,9 @@ while i < 100:
     #cv.imwrite(dest, frame)
 
     i++
+
+end = cv.getTickCount()
+time = (end - start)/cv.getTickFrequency()
 
 #cap.release()
 cv.destroyAllWindows()
