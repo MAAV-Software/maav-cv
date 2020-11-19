@@ -31,12 +31,12 @@ using cv::Mat;
  *
  * Will loop indefinitely, pulling images from the camera and adding to queue
  */
-void driver();
+extern void driver();
 
 /**
  * Fetch the next RBG and Depth frames from the queue.
  */
-std::pair<Mat,Mat> getImage();
+extern std::pair<Mat,Mat> getImage();
 
 // Max latency is 5 frames in the queue
 const auto CAPACITY = 5;
