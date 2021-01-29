@@ -1,21 +1,31 @@
 #adapted from opencv documentation examples
+#commented code is general opencv functions, above their corresponding driver function
 
 import sys
 import math
 import cv2 as cv
 import numpy as np
+import camera-driver
 
-cap = cv.VideoCapture(0)
+color_queue = []
+depth_queue = []
+
+#cap = cv.VideoCapture(0)
+pullFrames(color_queue, depth_queue)
 
 # Check if the webcam is opened correctly
-if not cap.isOpened():
-    raise IOError("Cannot open webcam")
+#if not cap.isOpened():
+#    raise IOError("Cannot open webcam")
 
 dest = '_________'
 
+start = cv.getTickCount()
+
 i = 0
 while i < 33:
-    ret, src = cap.read()
+    #ret, src = cap.read()
+    frame, depth = getImage(color_queue, depth_queue)
+
     dst = cv.Canny(src, 50, 200, None, 3)
     cdst = cv.cvtColor(dst, cv.COLOR_GRAY2BGR)
     cdstP = np.copy(cdst)
@@ -48,5 +58,8 @@ while i < 33:
 
     i++
 
-cap.release()
+end = cv.getTickCount()
+time = (end - start)/cv.getTickFrequency()
+
+#cap.release()
 cv.destroyAllWindows()
