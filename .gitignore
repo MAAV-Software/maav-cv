@@ -5,3 +5,6 @@ env
 
 # Ignore development environment files for IDEs or other editors
 .vscode
+mast-images
+mast-videos
+findobj
