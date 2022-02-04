@@ -1,11 +1,8 @@
 import cv2 as cv
 import numpy as np
 
-lower = np.array([80,40,0])
-upper = np.array([150,255,255])
-
 MIN_MATCH_COUNT = 10
-to_match = cv.imread('mast-images/isolatedfront.png')
+to_match = cv.imread('isolatedfront.png')
 to_match_gray = cv.cvtColor(to_match, cv.COLOR_BGR2GRAY)
 h,w = to_match_gray.shape
 
@@ -16,8 +13,8 @@ index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks = 50)
 flann = cv.FlannBasedMatcher(index_params, search_params)
 
-cap = cv.VideoCapture("mast-videos/mast_description.m4v")
-cap.set(1,1900)
+cap = cv.VideoCapture("mast-videos/mast_description.m4v") # replace with path to mast video
+cap.set(1,1900) # set frame to start from
 
 ran = False
 while True:

@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 matplotlib.use("TKAgg")
 
 MIN_MATCH_COUNT = 10
-img1 = cv.imread('mast-images/isolatedfront.png',0)          # queryImage
-img2 = cv.imread('mast-images/frontright2.png',0) # trainImage
+img1 = cv.imread('isolatedfront.png',0) # queryImage
+img2 = cv.imread('mast-images/front.png',0) # replace with image to test
 # Initiate SIFT detector
 sift = cv.SIFT_create()
 # find the keypoints and descriptors with SIFT

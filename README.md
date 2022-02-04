@@ -211,7 +211,6 @@ However, building the RealSense library from source and placing the `.so` files
 into the `env/` folder manually will work for running programs that need the
 RealSense library. This section will detail the process for this manual
 work-around.
-
 ## How to Fix
 
 TODO Make cleaner.
@@ -232,4 +231,6 @@ be moved to `env/lib/python3.7/site-packages/` in the maav-cv repo folder.
 Github Issue with details on how to fix this by compiling from source:
 
 https://github.com/IntelRealSense/librealsense/issues/5275
+# Appendix C: Using the FLANN Examples
 
+For `flann.py` you need to change the string on line 9 to the path to the file you want to test detection on. For `overlay.py` and `overlay_nofilter.py`, change the string on line 21/16 to the path to the mast description video. Use the enter key to move forward in the video.
