@@ -11,6 +11,22 @@ using CMake, ROS with catkin_ws, etc.
 
 Additionally, this gives members of our team experience working with Python.
 
+# Running Sample Code
+
+By the end of this README, you should be able to run the sample code without difficulties:
+```bash
+python3 hello.py
+```
+Depending on some other factors involving `pyrealsense2`, you might also
+be able to run the Depth Camera sample code if you have an Intel D4XX camera:
+```bash
+python3 hello-rs.py
+```
+
+I encourage you to look at the code and modify it. For example, change the
+image used, modify the image using OpenCV functions, or do anything else
+creative you can think of!
+
 # Getting Started
 
 This tutorial was intended for Ubuntu / Linux, and modified for support in Mac
@@ -20,32 +36,31 @@ have some difficulties still - reach out if you have trouble.
 First, clone this repository. You can either use HTTPS or SSH with a key setup
 through your account.
 ```bash
-$ git clone <link>
-$ cd maav-cv
+git clone <link>
+cd maav-cv
 ```
 
 Next, install required software to create a Python virtual environment for
 installing dependencies and working on CV projects.
 ```bash
 # WSL / Linux:
-$ sudo apt-get update
-$ sudo apt-get install python3.7 python3-pip
-$ pip install virtualenv
+sudo apt-get update
+sudo apt-get install virtualenv
 
 # Mac with Homebrew:
-$ brew install python@3.7
-$ pip install virtualenv
+brew install python@3.8
+pip install virtualenv
 ```
 
-Setup your virtual environment using Python 3.7.x.
+Setup your virtual environment using Python 3.8.x.
 ```bash
 # WSL / Linux:
-$ virtualenv --python=/usr/bin/python3.7 env
-$ source env/bin/activate
+virtualenv env
+source env/bin/activate
 
 # Mac:
-$ virtualenv --python=/usr/local/Cellar/python@3.7/3.7.9/bin/python3.7
-$ source env/bin/activate
+virtualenv --python=/usr/local/Cellar/python@3.7/3.7.9/bin/python3.7
+source env/bin/activate
 ```
 
 **NOTE: You MUST source the activate file everytime you begin any testing or
@@ -56,7 +71,7 @@ We have included `requirements.txt` to install OpenCV and any other required
 Python libraries. To install these requirements,
 run the following command:
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Windows and WSL Aside: X-Server
@@ -65,7 +80,7 @@ Normally OpenCV GUI code can run just fine in this environment. However, if
 you attempt to run this code in Windows with WSL, you will encounter an
 error similar to one of these:
 ```bash
-$ python3 hello.py
+python3 hello.py
 
 ...
 qt.qpa.xcb: could not connect to display
@@ -81,6 +96,8 @@ This is because Windows and WSL do not natively support Linux GUI applications.
 We will install an external program to host an X-Server, which will process
 data and display a GUI that interacts with your program.
 
+### Setting up X-Server
+
 The X-Server application we will use is vcXsrv, which you can
 [download here](https://sourceforge.net/projects/vcxsrv/). After installing,
 start the application, and start it with default settings **EXCEPT FOR ONE:
@@ -94,7 +111,7 @@ the X-Server will be used for displaying GUI apps.
 First, see what version of WSL you are using. Open Windows Powershell, and run
 the following command:
 ```
-> wsl -l -v
+wsl -l -v
   NAME                   STATE           VERSION
 * Ubuntu-18.04           Running         2
   ...
@@ -103,30 +120,22 @@ In this example, I am running WSL2. So, once you know which version you are
 running, use the appropriate `DISPLAY` environment variable below:
 ```bash
 # WSL1:
-$ export DISPLAY="localhost:0"
+export DISPLAY="localhost:0"
 
 # WSL2:
-$ export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 ```
 **Tip:** Add this line to the end of your `~/.bashrc` so that it will run
 everytime you start a new bash terminal. It's an extra step you won't have
 to remember.
 
-# Running Sample Code
+### X-Server Troubleshooting
 
-At this point, you should be able to run the sample code without difficulties:
-```bash
-$ python3 hello.py
-```
-Depending on some other factors involving `pyrealsense2`, you might also
-be able to run the Depth Camera sample code if you have an Intel D4XX camera:
-```bash
-$ python3 hello-rs.py
-```
+If you are still having trouble connecting to the X-Server for image display, you may have vcXsrv blocked in your Windows firewall. Make sure that you allows vcXsrv through your firewall to display results.
 
-I encourage you to look at the code and modify it. For example, change the
-image used, modify the image using OpenCV functions, or do anything else
-creative you can think of!
+![Firewall Setting](https://i.imgur.com/Yo9UDUq.png)
+
+![vcXsrv in Firewall Settings](https://i.imgur.com/vgY14WT.png)
 
 # Development Etiquette
 
@@ -143,7 +152,8 @@ Make sure your identity through Git is setup well.
 ```bash
 # List current global config, which may contain identity info
 
-$ git config --global -l
+git config --global -l
+
 user.name=Jacob Minock
 user.email=jaminock@umich.edu
 core.editor=vim
@@ -152,8 +162,8 @@ core.editor=vim
 # Set or Change some things (for any repository you use)
 # Omit --global to just make it for THIS repository
 
-$ git config --global user.name "Jacob Minock"
-$ git config --global user.email "jaminock@umich.edu"
+git config --global user.name "Jacob Minock"
+git config --global user.email "jaminock@umich.edu"
 ```
 
 ## Git Branches
@@ -166,13 +176,13 @@ happen with very small fixes - like updating a `README.md` or one doc.
 
 ```bash
 # List branches
-$ git branch
+git branch
 
 # Create a new branch
-$ git checkout -b <branch>
+git checkout -b <branch>
 
 # Switch to a branch
-$ git checkout <branch>
+git checkout <branch>
 ```
 
 ## Git Repository Fork
@@ -198,7 +208,8 @@ https://github.com/IntelRealSense/librealsense/tree/master/wrappers/python
 You might run into the following, especially on a Mac, when running
 `pip install -r requirements`:
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
+
 ...
 ERROR: Could not find a version that satisfies the requirement pyrealsense2>=2.2
 ```
