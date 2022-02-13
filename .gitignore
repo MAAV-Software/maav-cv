@@ -5,3 +5,8 @@ env
 
 # Ignore development environment files for IDEs or other editors
 .vscode
+
+__pycache__
+
+mast-images/
+mast-videos/
